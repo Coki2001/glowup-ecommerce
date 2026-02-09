@@ -1,0 +1,149 @@
+<!DOCTYPE html>
+<html lang="sr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>GlowUp | Premium Cosmetics</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+    <nav class="navbar">
+        <div class="logo">GLOW<span>UP</span></div>
+        <ul class="nav-links">
+            <li><a href="index.html">Početna</a></li>
+            <li><a href="proizvodi.html">Proizvodi</a></li>
+            <li class="cart-container">
+                <a href="javascript:void(0)" id="cart-icon">
+                    🛒 Korpa (<span id="cart-count">0</span>)
+                </a>
+            </li>
+        </ul>
+    </nav>
+
+    <header class="hero">
+        <div class="hero-content">
+            <h1>Otkrijte Svoj Sjaj</h1>
+            <p>Premium kozmetika za vašu kožu.</p>
+            <br>
+            <a href="#proizvodi" class="btn">Kupite Odmah</a>
+        </div>
+    </header>
+
+    <section class="video-feature">
+<video autoplay muted loop playsinline webkit-playsinline preload="auto" class="bg-video">
+    <source src="glow-video.mp4" type="video/mp4">
+    <img src="video-placeholder.jpg" title="Vaš pretraživač ne podržava video.">
+</video>
+        <div class="video-overlay">
+            <span>The Science of Glow</span>
+            <h2>Pure Gold & Hyaluronic</h2>
+        </div>
+    </section>
+
+    <section class="products" id="proizvodi">
+        <h2 class="section-title">Naši Bestseleri</h2>
+        <div class="product-grid">
+            <div class="product-card">
+                <div class="product-image">
+                    <img src="serum.jpg" alt="Midnight Repair Serum">
+                </div>
+                <h3>Midnight Repair Serum</h3>
+                <p>Duboka regeneracija tokom noći.</p>
+                <span class="price">4.200 RSD</span>
+                <button class="buy-btn">Dodaj u korpu</button>
+            </div>
+
+            <div class="product-card">
+                <div class="product-image">
+                    <img src="krema.jpg" alt="Gold Glow Cream">
+                </div>
+                <h3>Gold Glow Face Cream</h3>
+                <p>Luksuzna krema sa česticama zlata.</p>
+                <span class="price">3.800 RSD</span>
+                <button class="buy-btn">Dodaj u korpu</button>
+            </div>
+
+            <div class="product-card">
+                <div class="product-image">
+                    <img src="ulje.jpg" alt="Rose Elixir Oil">
+                </div>
+                <h3>Rose Elixir Oil</h3>
+                <p>Eterično ulje divlje ruže.</p>
+                <span class="price">2.500 RSD</span>
+                <button class="buy-btn">Dodaj u korpu</button>
+            </div>
+        </div>
+    </section>
+
+    <footer class="main-footer">
+        <div class="footer-grid">
+            <div class="footer-section">
+                <div class="footer-logo">GLOW<span>UP</span></div>
+                <p>Pridružite se našoj listi za ekskluzivne ponude.</p>
+                <div class="newsletter-simple">
+                    <input type="email" placeholder="Vaš e-mail">
+                    <button type="button">Prijavi se</button>
+                </div>
+            </div>
+
+            <div class="footer-section">
+                <h4>Istraži</h4>
+                <ul>
+                    <li><a href="#proizvodi">Svi proizvodi</a></li>
+                    <li><a href="#">Nega lica</a></li>
+                    <li><a href="#">Poklon setovi</a></li>
+                </ul>
+            </div>
+
+            <div class="footer-section">
+                <h4>Prati nas</h4>
+                <ul>
+                    <li><a href="#">Instagram</a></li>
+                    <li><a href="#">Facebook</a></li>
+                    <li><a href="#">TikTok</a></li>
+                </ul>
+            </div>
+        </div>
+        <div class="footer-bottom">
+            &copy; 2026 GlowUp Cosmetics. Sva prava zadržana.
+        </div>
+    </footer>
+
+    <div id="cart-modal" class="modal">
+    <div class="modal-content">
+        <span class="close-modal">&times;</span>
+        <h2>Tvoja Korpa</h2>
+        
+        <div id="cart-items">
+            </div>
+
+        <div class="cart-summary">
+            <hr>
+            <div class="total-row">
+                <span>Ukupno:</span>
+                <span><span id="total-price">0</span> RSD</span>
+            </div>
+            
+<form id="checkout-form">
+    <div class="input-group">
+        <input type="text" id="cust-name" placeholder="Ime i prezime" required>
+        <input type="text" id="cust-phone" placeholder="Broj telefona" required>
+    </div>
+    <input type="text" id="cust-address" placeholder="Ulica i broj" required>
+    <div class="input-group">
+        <input type="text" id="cust-city" placeholder="Grad" required>
+        <input type="number" id="cust-zip" placeholder="Poštanski broj" required>
+    </div>
+    <button type="submit" class="order-btn">POTVRDI PORUDŽBINU</button>
+</form>
+        </div>
+    </div>
+</div>
+
+    <script src="script.js"></script>
+
+<script src="https://unpkg.com/@sanity/client@6.15.10/dist/index.umd.min.js"></script>
+</body>
+</body>
+</html>
