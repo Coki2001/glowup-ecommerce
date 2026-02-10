@@ -233,27 +233,27 @@ h1, h2, h3, .logo, .section-title { font-family: 'Playfair Display', serif; }
     border-radius: 8px;
     margin-bottom: 15px;
 }
-/* --- MOBILNA OPTIMIZACIJA --- */
+
 @media (max-width: 768px) {
-    /* 1. Smanjujemo glavni naslov da ne zauzima ceo ekran */
+    
     .section-title {
         font-size: 24px !important;
         margin-bottom: 20px;
     }
 
-    /* 2. Grid za bestselere: umesto 3 u redu, na telefonu stavljamo 1 ili 2 */
+
     .bestsellers-grid, .product-grid {
-        grid-template-columns: repeat(2, 1fr) !important; /* Dva proizvoda jedan pored drugog */
+        grid-template-columns: repeat(2, 1fr) !important; 
         gap: 15px !important;
         padding: 10px !important;
     }
 
-    /* 3. Prilagođavamo sliku proizvoda da ne bude ogromna */
+
     .product-image img {
-        height: 200px !important; /* Manja visina za telefon */
+        height: 200px !important; 
     }
 
-    /* 4. Smanjujemo tekst i dugmiće da bi sve stalo */
+
     .product-info h3 {
         font-size: 14px;
     }
@@ -267,7 +267,7 @@ h1, h2, h3, .logo, .section-title { font-family: 'Playfair Display', serif; }
         font-size: 12px;
     }
 
-    /* 5. Navigacija (Početna, Proizvodi, Korpa) */
+
     nav ul {
         gap: 10px;
     }
@@ -277,9 +277,57 @@ h1, h2, h3, .logo, .section-title { font-family: 'Playfair Display', serif; }
     }
 }
 
-/* Za baš male telefone (npr. iPhone SE) */
+
 @media (max-width: 480px) {
     .bestsellers-grid, .product-grid {
-        grid-template-columns: 1fr !important; /* Jedan proizvod preko celog ekrana */
+        grid-template-columns: 1fr !important; 
+    }
+}
+
+@media (max-width: 768px) {
+    
+    .bestsellers-grid {
+        display: grid !important;
+        grid-template-columns: repeat(2, 1fr) !important; 
+        gap: 12px !important; 
+        padding: 15px !important;
+    }
+
+    
+    .bestsellers-grid .product-image img {
+        height: 180px !important; 
+        border-radius: 8px;
+    }
+
+    
+    .section-title {
+        font-size: 22px !important;
+        margin-top: 30px;
+        text-align: center;
+    }
+
+    
+    .bestsellers-grid .product-card {
+        padding: 8px !important;
+        border-radius: 10px;
+    }
+
+    
+    .bestsellers-grid .product-info h3 {
+        font-size: 13px !important;
+        margin: 5px 0;
+    }
+
+    .bestsellers-grid .price {
+        font-size: 14px !important;
+        color: #d4af37;
+    }
+}
+
+
+@media (max-width: 400px) {
+    .bestsellers-grid .buy-btn {
+        font-size: 10px !important;
+        padding: 8px 4px !important;
     }
 }
