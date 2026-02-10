@@ -4,8 +4,11 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>GlowUp | Premium Cosmetics</title>
+<link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;700&family=Playfair+Display:ital,wght@0,400;0,700;1,400&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="style.css">
-</head>
+
+<link rel="stylesheet" href="style.css?v=1">
+  </head>
 <body>
     <nav class="navbar">
         <div class="logo">GLOW<span>UP</span></div>
@@ -33,27 +36,68 @@
 
     <section class="products" id="proizvodi">
         <h2 class="section-title">Naši Bestseleri</h2>
-        <div class="product-grid">
+        <div class="bestsellers-grid">
             </div>
     </section>
 
-    <footer class="main-footer">
+        <footer class="main-footer">
         <div class="footer-grid">
             <div class="footer-section">
                 <div class="footer-logo">GLOW<span>UP</span></div>
                 <p>Pridružite se našoj listi za ekskluzivne ponude.</p>
+                <div class="newsletter-simple">
+                    <input type="email" placeholder="Vaš e-mail">
+                    <button type="button">Prijavi se</button>
+                </div>
             </div>
+
             <div class="footer-section">
                 <h4>Istraži</h4>
                 <ul>
                     <li><a href="#proizvodi">Svi proizvodi</a></li>
                     <li><a href="#">Nega lica</a></li>
+                    <li><a href="#">Poklon setovi</a></li>
+                </ul>
+            </div>
+
+            <div class="footer-section">
+                <h4>Prati nas</h4>
+                <ul>
+                    <li><a href="#">Instagram</a></li>
+                    <li><a href="#">Facebook</a></li>
+                    <li><a href="#">TikTok</a></li>
                 </ul>
             </div>
         </div>
         <div class="footer-bottom">
             &copy; 2026 GlowUp Cosmetics. Sva prava zadržana.
         </div>
+    </footer>
+<div id="cart-modal" class="modal">
+    <div class="modal-content">
+        <span class="close-modal">&times;</span>
+        <h2>Tvoja Korpa</h2>
+        
+        <div id="cart-items">
+            </div>
+
+        <div class="cart-summary">
+            <hr>
+            <div class="total-row">
+                <span>Ukupno:</span>
+                <span><span id="total-price">0</span> RSD</span>
+            </div>
+            
+            <form id="checkout-form">
+                <input type="text" id="cust-name" placeholder="Ime i prezime" required>
+                <input type="text" id="cust-phone" placeholder="Broj telefona" required>
+                <input type="text" id="cust-address" placeholder="Grad i adresa" required>
+                <button type="submit" class="order-btn">POTVRDI PORUDŽBINU</button>
+            </form>
+        </div>
+    </div>
+</div>
+
     </footer>
 
     <div id="cart-modal" class="modal">
@@ -64,14 +108,14 @@
             <div class="cart-total">
                 <h4>Ukupno: <span id="total-price">0</span> RSD</h4>
             </div>
-            <form id="checkout-form">
-                <input type="text" placeholder="Ime i prezime" required>
-                <input type="text" placeholder="Grad" required>
-                <input type="text" placeholder="Broj telefona" required>
-                <button type="submit" class="order-btn">Završi kupovinu</button>
-            </form>
-        </div>
-    </div>
+          <form id="checkout-form">
+    <input type="text" id="customer-name" placeholder="Ime i prezime" required>
+    <input type="text" id="customer-city" placeholder="Grad" required>
+    <input type="text" id="customer-zip" placeholder="Poštanski broj" required>
+    <input type="text" id="customer-phone" placeholder="Broj telefona" required>
+    <button type="submit" class="order-btn">Završi kupovinu</button>
+</form>
+          
 
     <script src="script.js"></script>
 </body>

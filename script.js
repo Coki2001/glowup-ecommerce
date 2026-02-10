@@ -1,11 +1,10 @@
 var PROJECT_ID = "8lc7ipc2"; 
 var DATASET = "production";
-var REQ_URL = `https://${PROJECT_ID}.api.sanity.io/v2021-10-21/data/query/${DATASET}?query=*[_type == "product"]{title, price, "imageUrl": image.asset->url}`;
+var REQ_URL = `https://${PROJECT_ID}.api.sanity.io/v2021-10-21/data/query/${DATASET}?query=*[_type == "product"]{title, price, description, "imageUrl": image.asset->url}`;
 
-// Inicijalizacija korpe
 var cart = JSON.parse(localStorage.getItem('glowup_cart')) || [];
 
-// Funkcija za dodavanje u korpu
+// FUNKCIJE KORPE
 window.addToCart = function(name, price) {
     cart.push({ name, price });
     localStorage.setItem('glowup_cart', JSON.stringify(cart));
@@ -18,19 +17,16 @@ window.addToCart = function(name, price) {
     }
 };
 
-// Funkcija za brisanje iz korpe
 window.removeFromCart = function(index) {
     cart.splice(index, 1);
     localStorage.setItem('glowup_cart', JSON.stringify(cart));
     updateCartUI();
 };
 
-// Ažuriranje izgleda korpe
 function updateCartUI() {
     var count = document.getElementById('cart-count');
     var itemsDiv = document.getElementById('cart-items');
     var totalSpan = document.getElementById('total-price');
-
     if (count) count.innerText = cart.length;
     if (itemsDiv) {
         itemsDiv.innerHTML = cart.length === 0 ? `<p style="text-align:center; padding:20px; color:#888;">Korpa je prazna</p>` :
@@ -45,55 +41,48 @@ function updateCartUI() {
     if (totalSpan) totalSpan.innerText = total.toLocaleString();
 }
 
-// Glavne kontrole kada se stranica učita
+// UČITAVANJE PODATAKA
 document.addEventListener('DOMContentLoaded', function() {
     var modal = document.getElementById('cart-modal');
     var icon = document.getElementById('cart-icon');
     var close = document.querySelector('.close-modal');
+    if (icon) icon.onclick = (e) => { e.preventDefault(); modal.style.display = "block"; updateCartUI(); };
+    if (close) close.onclick = () => modal.style.display = "none";
 
-    // OTVARANJE KORPE I SKRIVANJE GRIDA
-    if (icon) {
-        icon.onclick = function(e) {
-            e.preventDefault();
-            if (modal) {
-                modal.style.display = "block";
-                document.body.classList.add('cart-open'); // Ključno za nestajanje grida
-                updateCartUI();
+    fetch(REQ_URL)
+        .then(res => res.json())
+        .then(({ result }) => {
+            const bestsellerGrid = document.querySelector('.bestsellers-grid'); // Za index.html
+            const allProductsGrid = document.querySelector('.product-grid');    // Za proizvodi.html
+
+            if (result) {
+                // Bestseleri (samo oni sa zvezdicom)
+                if (bestsellerGrid) {
+                    const bestsellers = result.filter(p => p.title.includes('*'));
+                    bestsellerGrid.innerHTML = bestsellers.map(p => createHTML(p)).join('');
+                }
+                // Svi proizvodi
+                if (allProductsGrid) {
+                    allProductsGrid.innerHTML = result.map(p => createHTML(p)).join('');
+                }
             }
-        }
-    }
-
-    // ZATVARANJE KORPE I VRAĆANJE GRIDA
-    if (close) {
-        close.onclick = function() {
-            if (modal) modal.style.display = "none";
-            document.body.classList.remove('cart-open'); // Vraća grid
-        }
-    }
-
-    // Zatvaranje klikom van modala
-    window.onclick = function(e) {
-        if (e.target == modal) {
-            modal.style.display = "none";
-            document.body.classList.remove('cart-open');
-        }
-    };
-
-    // UČITAVANJE PROIZVODA IZ SANITY-JA
-    fetch(REQ_URL).then(res => res.json()).then(({result}) => {
-        // Tražimo bilo koji grid (products-grid ili product-grid)
-        var container = document.querySelector('.product-grid') || document.querySelector('.products-grid');
-        if(container) {
-            container.innerHTML = result.map(p => `
-                <div class="product-card">
-                    <img src="${p.imageUrl || 'https://via.placeholder.com/150'}" style="width:100%; height:200px; object-fit:cover; border-radius:8px;">
-                    <h3>${p.title}</h3>
-                    <p style="color:#d4af37; font-weight:bold;">${p.price} RSD</p>
-                    <button class="buy-btn" onclick="addToCart('${p.title}', ${p.price})">Dodaj u korpu</button>
-                </div>
-            `).join('');
-        }
-    });
-
-    updateCartUI();
+            updateCartUI();
+        });
 });
+
+function createHTML(p) {
+    // Sklanjamo zvezdicu iz naslova da bi na sajtu pisalo normalno ime
+    var cleanTitle = p.title.replace('*', '').trim();
+    return `
+        <div class="product-card">
+            <div class="product-image">
+                <img src="${p.imageUrl || 'https://via.placeholder.com/400'}" alt="${cleanTitle}">
+            </div>
+            <div class="product-info">
+                <h3>${cleanTitle}</h3>
+                <span class="price">${p.price} RSD</span>
+                <p class="product-description">${p.description || 'Premium formula.'}</p>
+                <button class="buy-btn" onclick="addToCart('${cleanTitle}', ${p.price})">Dodaj u korpu</button>
+            </div>
+        </div>`;
+}
