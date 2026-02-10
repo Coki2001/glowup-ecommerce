@@ -4,7 +4,7 @@ var REQ_URL = `https://${PROJECT_ID}.api.sanity.io/v2021-10-21/data/query/${DATA
 
 var cart = JSON.parse(localStorage.getItem('glowup_cart')) || [];
 
-// FUNKCIJE KORPE
+
 window.addToCart = function(name, price) {
     cart.push({ name, price });
     localStorage.setItem('glowup_cart', JSON.stringify(cart));
@@ -41,7 +41,7 @@ function updateCartUI() {
     if (totalSpan) totalSpan.innerText = total.toLocaleString();
 }
 
-// UČITAVANJE PODATAKA
+
 document.addEventListener('DOMContentLoaded', function() {
     var modal = document.getElementById('cart-modal');
     var icon = document.getElementById('cart-icon');
@@ -52,16 +52,16 @@ document.addEventListener('DOMContentLoaded', function() {
     fetch(REQ_URL)
         .then(res => res.json())
         .then(({ result }) => {
-            const bestsellerGrid = document.querySelector('.bestsellers-grid'); // Za index.html
-            const allProductsGrid = document.querySelector('.product-grid');    // Za proizvodi.html
+            const bestsellerGrid = document.querySelector('.bestsellers-grid'); 
+            const allProductsGrid = document.querySelector('.product-grid');    
 
             if (result) {
-                // Bestseleri (samo oni sa zvezdicom)
+                
                 if (bestsellerGrid) {
                     const bestsellers = result.filter(p => p.title.includes('*'));
                     bestsellerGrid.innerHTML = bestsellers.map(p => createHTML(p)).join('');
                 }
-                // Svi proizvodi
+                
                 if (allProductsGrid) {
                     allProductsGrid.innerHTML = result.map(p => createHTML(p)).join('');
                 }
@@ -71,7 +71,7 @@ document.addEventListener('DOMContentLoaded', function() {
 });
 
 function createHTML(p) {
-    // Sklanjamo zvezdicu iz naslova da bi na sajtu pisalo normalno ime
+
     var cleanTitle = p.title.replace('*', '').trim();
     return `
         <div class="product-card">
